@@ -7,7 +7,9 @@ class TravelingSalesmanProblemSolver(BranchAndBound):
         super().__init__()
         self.graph = graph
         self.n = graph.number_of_nodes()
-        self.root_node = []
+
+    def _root_node(self):
+        return []
 
     def _is_solution(self, nodes):
         return len(nodes) == self.n and len(set(nodes)) == self.n

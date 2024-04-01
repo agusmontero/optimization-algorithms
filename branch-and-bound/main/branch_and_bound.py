@@ -5,10 +5,9 @@ class BranchAndBound(ABC):
     def __init__(self):
         self.best_solution = None
         self.best_cost = float('inf')
-        self.root_node = None
 
     def solve(self):
-        self._search(self.root_node)
+        self._search(self._root_node())
         return self.best_solution, self.best_cost
 
     def _search(self, node):
@@ -24,6 +23,10 @@ class BranchAndBound(ABC):
     def _is_better(self, node, best_solution):
         current_cost = self._evaluate(node)
         return current_cost < self.best_cost
+
+    @abstractmethod
+    def _root_node(self):
+        raise NotImplementedError
 
     @abstractmethod
     def _is_solution(self, node):
