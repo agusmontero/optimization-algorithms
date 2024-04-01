@@ -17,7 +17,7 @@ class TestTravelingSalesmanProblemSolver(unittest.TestCase):
         optimal_solution = [0, 2, 1, 3]
         optimal_cost = 20 + 15 + 17 + 21
 
-        tsp_instance = nx.from_numpy_matrix(costs_matrix)
+        tsp_instance = nx.from_numpy_array(costs_matrix)
 
         solver = TravelingSalesmanProblemSolver(tsp_instance)
         best_solution, best_cost = solver.solve()
