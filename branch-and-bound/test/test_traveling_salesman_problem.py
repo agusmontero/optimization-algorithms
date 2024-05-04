@@ -26,5 +26,5 @@ class TestTravelingSalesmanProblemSolver(unittest.TestCase):
         self.assertEqual(best_solution, optimal_solution)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

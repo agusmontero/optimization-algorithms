@@ -4,42 +4,42 @@ from abc import ABC, abstractmethod
 class BranchAndBound(ABC):
     def __init__(self):
         self.best_solution = None
-        self.best_cost = float('inf')
+        self.best_cost = float("inf")
 
     def solve(self):
-        self._search(self._root_node())
+        self._search(self._initial_state())
         return self.best_solution, self.best_cost
 
-    def _search(self, node):
-        if self._is_solution(node) and self._is_better(node, self.best_solution):
-            self.best_solution = node
-            self.best_cost = self._evaluate(node)
+    def _search(self, state):
+        if self._is_solution(state) and self._is_better(state):
+            self.best_solution = state
+            self.best_cost = self._evaluate(state)
             return
 
-        for next_state in self._branch(node):
+        for next_state in self._branch(state):
             if self._bound(next_state) < self.best_cost:
                 self._search(next_state)
 
-    def _is_better(self, node, best_solution):
-        current_cost = self._evaluate(node)
+    def _is_better(self, state):
+        current_cost = self._evaluate(state)
         return current_cost < self.best_cost
 
     @abstractmethod
-    def _root_node(self):
+    def _initial_state(self):
         raise NotImplementedError
 
     @abstractmethod
-    def _is_solution(self, node):
+    def _is_solution(self, state):
         raise NotImplementedError
 
     @abstractmethod
-    def _evaluate(self, node):
+    def _evaluate(self, state):
         raise NotImplementedError
 
     @abstractmethod
-    def _branch(self, node):
+    def _branch(self, state):
         raise NotImplementedError
 
     @abstractmethod
-    def _bound(self, node):
+    def _bound(self, state):
         raise NotImplementedError
